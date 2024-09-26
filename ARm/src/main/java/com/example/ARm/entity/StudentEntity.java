@@ -1,7 +1,6 @@
 package com.example.ARm.entity;
 
 import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +22,6 @@ public class StudentEntity {
 	@Column(name = "birth_date")
 	private Date birth_date;
 
-	
 	// Getters and Setters
 	
 	public Long getId() {
@@ -49,7 +47,4 @@ public class StudentEntity {
 	public void setBirth_date(Date birth_date) {
 		this.birth_date = birth_date;
 	}
-	
-	
-	
 }
