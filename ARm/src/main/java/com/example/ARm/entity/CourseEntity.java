@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,7 +20,8 @@ public class CourseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "topic")
+	@OneToOne
+	@JoinColumn(name = "topic")
 	private TopicEntity topic;
 	
 	@Column(name = "start_date")
@@ -26,13 +30,15 @@ public class CourseEntity {
 	@Column(name = "end_date")
 	private Date end_date;
 	
-	@Column(name = "teacher")
+	@OneToOne
+	@JoinColumn(name = "teacher")
 	private TeacherEntity teacher;
 	
 	@Column(name = "price")
 	private Float price;
 	
-	@Column(name = "students")
+	@OneToMany
+	@JoinColumn(name = "students")
 	private List<StudentEntity> students;
 
 	// Getters and Setters
