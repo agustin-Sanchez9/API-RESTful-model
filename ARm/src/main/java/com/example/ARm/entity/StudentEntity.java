@@ -1,11 +1,15 @@
 package com.example.ARm.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,10 +24,13 @@ public class StudentEntity {
 	private String name;
 	
 	@Column(name = "birth_date")
-	private Date birth_date;
-
-	// Getters and Setters
+	private LocalDate birth_date;
 	
+	@ManyToMany(mappedBy = "course_id")
+	private List<CourseEntity> courses;
+	
+	// Getters and Setters
+
 	public Long getId() {
 		return id;
 	}
@@ -40,11 +47,19 @@ public class StudentEntity {
 		this.name = name;
 	}
 
-	public Date getBirth_date() {
+	public LocalDate getBirth_date() {
 		return birth_date;
 	}
 
-	public void setBirth_date(Date birth_date) {
+	public void setBirth_date(LocalDate birth_date) {
 		this.birth_date = birth_date;
+	}
+
+	public List<CourseEntity> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<CourseEntity> courses) {
+		this.courses = courses;
 	}
 }
