@@ -20,7 +20,7 @@ public class CourseController {
 	@Autowired
 	CourseInterface course_interface;
 	
-	@GetMapping("/course")
+	@GetMapping("/courses")
 	public List<CourseEntity> getCourses(){
 		return course_interface.findAll();
 	}

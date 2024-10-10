@@ -25,9 +25,7 @@ public class StudentEntity {
 	
 	@Column(name = "birth_date")
 	private LocalDate birth_date;
-	
-	@ManyToMany(mappedBy = "course_id")
-	private List<CourseEntity> courses;
+
 	
 	// Getters and Setters
 
@@ -53,13 +51,5 @@ public class StudentEntity {
 
 	public void setBirth_date(LocalDate birth_date) {
 		this.birth_date = birth_date;
-	}
-
-	public List<CourseEntity> getCourses() {
-		return courses;
-	}
-
-	public void setCourses(List<CourseEntity> courses) {
-		this.courses = courses;
 	}
 }

@@ -9,7 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -22,6 +24,7 @@ public class CourseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne
 	@JoinColumn(name = "topic_id")
 	private TopicEntity topic;
 	
@@ -31,13 +34,19 @@ public class CourseEntity {
 	@Column(name = "end_date")
 	private LocalDate end_date;
 	
+	@ManyToOne
 	@JoinColumn(name = "teacher_id")
 	private TeacherEntity teacher;
 	
 	@Column(name = "price")
 	private Float price;
 	
-	@ManyToMany(mappedBy = "student_id")
+	@ManyToMany
+	@JoinTable(
+			name = "course_student",
+			joinColumns = @JoinColumn(name = "course_id"),
+			inverseJoinColumns = @JoinColumn(name = "student_id")
+			)
 	private List<StudentEntity> students;
 	
 	// Getters and Setters
