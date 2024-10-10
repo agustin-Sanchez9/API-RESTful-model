@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,12 +32,12 @@ public class TopicController {
 	}
 	
 	@PostMapping("/topic")
-	public void postTopic(@RequestParam TopicEntity topic) {
+	public void postTopic(@RequestBody TopicEntity topic) {
 		topic_interface.post(topic);
 	}
 
 	@PutMapping("/topic")
-	public void putTopic(@RequestParam TopicEntity topic) {
+	public void putTopic(@RequestBody TopicEntity topic) {
 		topic_interface.update(topic);
 	}
 	

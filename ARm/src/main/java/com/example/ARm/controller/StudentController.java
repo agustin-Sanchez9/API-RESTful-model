@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,12 +32,12 @@ public class StudentController {
 	}
 	
 	@PostMapping("/student")
-	public void postStudent(@RequestParam StudentEntity student) {
+	public void postStudent(@RequestBody StudentEntity student) {
 		student_interface.post(student);
 	}
 
 	@PutMapping("/student")
-	public void putStudent(@RequestParam StudentEntity student) {
+	public void putStudent(@RequestBody StudentEntity student) {
 		student_interface.update(student);
 	}
 	
