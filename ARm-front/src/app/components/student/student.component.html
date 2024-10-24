@@ -1,1 +1,18 @@
-<p>student works!</p>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>birth date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *NgFor="let student of listStudents">
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.birth_date}}</td>
+        </tr>
+    </tbody>
+
+
+</table>
