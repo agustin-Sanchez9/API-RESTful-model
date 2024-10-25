@@ -1,1 +1,56 @@
-<p>course works!</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>topic</th>
+            <th>start date</th>
+            <th>end date</th>
+            <th>students</th>
+            <th>teachers</th>
+            <th>price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of listCourses">
+            <td>{{course.id}}</td>
+            <td>{{course.topic.name}}</td>
+            <td>{{course.start_date}}</td>
+            <td>{{course.end_date}}</td>
+            <td><button type="button" (click)="selectCourse(course.id)" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                 See list
+            </button></td>            
+            <td>{{course.teacher.name}}</td>
+            <td>{{course.price}}</td>
+            <td>
+                <button type="button" class="btn btn-warning"><i class="bi-pencil"></i></button>
+                <button type="button" class="btn btn-danger"><i class="bi-trash3"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Students</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <td class="d-flex" *ngFor="let student of selectedCourse?.students">
+                <li>{{student.name}}</li>
+            </td>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+<!--
+<td class="d-flex" *ngFor="let student of course.students">
+    <li>{{student.name}}</li>
+</td>
+-->

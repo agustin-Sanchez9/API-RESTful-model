@@ -8,8 +8,8 @@ import { Course } from '../models/Course';
 })
 export class CourseService {
 
-  private apiUrl = 'http://localhost:8080/Course'
-  private apiUrlAll = 'http://localhost:8080/Courses'
+  private apiUrl = 'http://localhost:8080/course'
+  private apiUrlAll = 'http://localhost:8080/courses'
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class CourseService {
 
   // get one course by his id
   getCourseById(id: number): Observable<Course> {
-    return this.http.get<Course>(`${this.apiUrl}/${id}`);
+    return this.http.get<Course>(`${this.apiUrl}?id=${id}`);
   }
 
   // create a new course
@@ -30,11 +30,11 @@ export class CourseService {
 
   // update a course
   updateCourse(id: number, Course: Course): Observable<Course> {
-    return this.http.put<Course>(`${this.apiUrl}/${id}`, Course);
+    return this.http.put<Course>(`${this.apiUrl}`, Course);
   }
 
   // delete a course
   deleteCourse(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}?id=${id}`);
   }
 }

@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../../models/Student';
 import { StudentService } from '../../services/student.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student',
-  standalone: true,
-  imports: [],
   templateUrl: './student.component.html',
   styleUrl: './student.component.css'
 })
 export class StudentComponent implements OnInit {
 
   listStudents: Student[] = [];
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private http: HttpClient) { }
 
   ngOnInit(): void {   
     this.list(); 

@@ -9,8 +9,8 @@ import { Topic } from '../models/Topic';
 })
 export class TopicService {
 
-  private apiUrl = 'http://localhost:8080/Topic'
-  private apiUrlAll = 'http://localhost:8080/Topics'
+  private apiUrl = 'http://localhost:8080/topic'
+  private apiUrlAll = 'http://localhost:8080/topics'
 
   constructor(private http: HttpClient) { }
 

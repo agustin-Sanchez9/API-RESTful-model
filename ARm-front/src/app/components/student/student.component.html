@@ -1,18 +1,21 @@
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>id</th>
             <th>name</th>
             <th>birth date</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr *NgFor="let student of listStudents">
+        <tr *ngFor="let student of listStudents">
             <td>{{student.id}}</td>
             <td>{{student.name}}</td>
             <td>{{student.birth_date}}</td>
+            <td>
+                <button type="button" class="btn btn-warning"><i class="bi-pencil"></i></button>
+                <button type="button" class="btn btn-danger"><i class="bi-trash3"></i></button>
+            </td>
         </tr>
     </tbody>
-
-
 </table>

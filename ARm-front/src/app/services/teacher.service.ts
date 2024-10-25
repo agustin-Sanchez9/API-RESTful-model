@@ -9,8 +9,8 @@ import { Teacher } from '../models/Teacher';
 })
 export class TeacherService {
 
-  private apiUrl = 'http://localhost:8080/Teacher'
-  private apiUrlAll = 'http://localhost:8080/Teachers'
+  private apiUrl = 'http://localhost:8080/teacher'
+  private apiUrlAll = 'http://localhost:8080/teachers'
 
   constructor(private http: HttpClient) { }
 

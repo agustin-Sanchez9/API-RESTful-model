@@ -6,13 +6,17 @@
     <a>Topics</a>
   </div>
   <div class ="nav">
-    <button type="button" class="btn btn-primary">get all</button>
+    <button type="button" class="btn btn-primary" (click)="navigateTo('courses')">get all</button>
     <button type="button" class="btn btn-primary">new</button>
-    <button type="button" class="btn btn-primary">get all</button>
+    <button type="button" class="btn btn-primary" (click)="navigateTo('students')">get all</button>
     <button type="button" class="btn btn-primary">new</button>
-    <button type="button" class="btn btn-primary">get all</button>
+    <button type="button" class="btn btn-primary" (click)="navigateTo('teachers')">get all</button>
     <button type="button" class="btn btn-primary">new</button>
-    <button type="button" class="btn btn-primary">get all</button>
+    <button type="button" class="btn btn-primary"(click)="navigateTo('topics')">get all</button>
     <button type="button" class="btn btn-primary">new</button>
   </div>
 </header>
+
+<main class="m-5">
+  <router-outlet></router-outlet>
+</main>
