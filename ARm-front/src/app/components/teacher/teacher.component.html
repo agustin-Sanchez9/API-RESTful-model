@@ -1,3 +1,4 @@
+<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#newModal"><i class="bi-floppy-fill"></i> Create New</button>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -14,18 +15,44 @@
             <td>{{teacher.teacher_id}}</td>
             <td>
                 <button type="button" (click)="selectTeacher(teacher.id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi-pencil"></i></button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi-trash3"></i></button>
+                <button type="button" (click)="selectTeacher(teacher.id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi-trash3"></i></button>
             </td>
         </tr>
     </tbody>
 </table>
 
+<div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new teacher</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="m-2">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" [(ngModel)]="newTeacher.name" name="name">
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="teacher code" [(ngModel)]="newTeacher.teacher_id" name="teacher code">
+                    <label for="teacher code">Teacher Code</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi-x-lg"></i> Cancel</button>
+            <button type="button" class="btn btn-success" (click)="new()" data-bs-dismiss="modal"><i class="bi-check-lg"></i> Confirm</button>
+        </div>
+      </div>
+    </div>
+</div>
 
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div *ngIf="selectedTeacher" class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Student {{selectedTeacher.id}}</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Teacher {{selectedTeacher.id}}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -49,15 +76,18 @@
 </div>
 
 
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div *ngIf="selectedTeacher" class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Students</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Teacher {{selectedTeacher.id}}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <p>Do you want to delete the teacher: {{selectedTeacher.name}}?</p>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi-x-lg"></i> NO</button>
+            <button type="button" (click)="delete()" class="btn btn-success" data-bs-dismiss="modal"><i class="bi-check-lg"></i> YES</button>
         </div>
       </div>
     </div>
-  </div>
+</div>

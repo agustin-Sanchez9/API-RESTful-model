@@ -13,6 +13,7 @@ export class TopicComponent implements OnInit {
 
   listTopics: Topic[] = [];
   selectedTopic!: Topic;
+  newTopic: Topic = new Topic;
   constructor(private topicService: TopicService, private http: HttpClient) { }
 
   ngOnInit(): void {   
@@ -36,6 +37,18 @@ export class TopicComponent implements OnInit {
   edit():void{
     console.log(this.selectedTopic);
     this.topicService.updateTopic(this.selectedTopic).subscribe(()=>{
+      this.list();
+    });
+  }
+
+  new():void{
+    this.topicService.createTopic(this.newTopic).subscribe(()=>{
+      this.list();
+    });
+  }
+
+  delete():void{
+    this.topicService.deleteTopic(this.selectedTopic.id).subscribe(()=>{
       this.list();
     });
   }

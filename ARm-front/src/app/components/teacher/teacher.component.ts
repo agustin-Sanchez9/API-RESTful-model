@@ -12,6 +12,7 @@ export class TeacherComponent implements OnInit {
 
   listTeachers: Teacher[] = [];
   selectedTeacher!: Teacher;
+  newTeacher: Teacher = new Teacher;
   constructor(private teacherService: TeacherService, private http: HttpClient) { }
 
   ngOnInit(): void {   
@@ -35,6 +36,18 @@ export class TeacherComponent implements OnInit {
   edit():void{
     console.log(this.selectedTeacher);
     this.teacherService.updateTeacher(this.selectedTeacher).subscribe(()=>{
+      this.list();
+    });
+  }
+
+  new():void{
+    this.teacherService.createTeacher(this.newTeacher).subscribe(()=>{
+      this.list();
+    });
+  }
+
+  delete():void{
+    this.teacherService.deleteTeacher(this.selectedTeacher.id).subscribe(()=>{
       this.list();
     });
   }

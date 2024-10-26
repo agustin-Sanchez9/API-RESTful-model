@@ -12,6 +12,7 @@ export class StudentComponent implements OnInit {
 
   listStudents: Student[] = [];
   selectedStudent!: Student;
+  newStudent: Student = new Student;
   constructor(private studentService: StudentService, private http: HttpClient) { }
 
   ngOnInit(): void {   
@@ -35,6 +36,18 @@ export class StudentComponent implements OnInit {
   edit():void{
     console.log(this.selectedStudent);
     this.studentService.updateStudent(this.selectedStudent).subscribe(()=>{
+      this.list();
+    });
+  }
+
+  new():void{
+    this.studentService.createStudent(this.newStudent).subscribe(()=>{
+      this.list();
+    });
+  }
+
+  delete():void{
+    this.studentService.deleteStudent(this.selectedStudent.id).subscribe(()=>{
       this.list();
     });
   }
