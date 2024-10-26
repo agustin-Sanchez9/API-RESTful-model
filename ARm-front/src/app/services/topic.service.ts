@@ -21,7 +21,7 @@ export class TopicService {
 
   // get one topic by his id
   getTopicById(id: number): Observable<Topic> {
-    return this.http.get<Topic>(`${this.apiUrl}/${id}`);
+    return this.http.get<Topic>(`${this.apiUrl}?id=${id}`);
   }
 
   // create a new topic
@@ -30,12 +30,12 @@ export class TopicService {
   }
 
   // update a topic
-  updateTopic(id: number, Topic: Topic): Observable<Topic> {
-    return this.http.put<Topic>(`${this.apiUrl}/${id}`, Topic);
+  updateTopic(Topic: Topic): Observable<Topic> {
+    return this.http.put<Topic>(`${this.apiUrl}`, Topic);
   }
 
   // delete a topic
   deleteTopic(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}?id=${id}`);
   }
 }

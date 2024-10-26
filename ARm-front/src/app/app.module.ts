@@ -12,6 +12,7 @@ import { StudentComponent } from "./components/student/student.component";
 import { TeacherComponent } from "./components/teacher/teacher.component";
 import { CourseComponent } from "./components/course/course.component";
 import { TopicComponent } from "./components/topic/topic.component";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { TopicComponent } from "./components/topic/topic.component";
         BrowserModule,
         HttpClientModule,
         RouterOutlet,
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule
     ],
     providers: [
         StudentService,

@@ -3,6 +3,11 @@ import { Course } from '../../models/Course';
 import { CourseService } from '../../services/course.service';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../../models/Student';
+import { Topic } from '../../models/Topic';
+import { Teacher } from '../../models/Teacher';
+import { TeacherService } from '../../services/teacher.service';
+import { StudentService } from '../../services/student.service';
+import { TopicService } from '../../services/topic.service';
 
 @Component({
   selector: 'app-course',
@@ -12,17 +17,51 @@ import { Student } from '../../models/Student';
 export class CourseComponent implements OnInit {
 
   listCourses: Course[] = [];
-  selectedCourse: any;
-  constructor(private courseService: CourseService, private http: HttpClient) { }
+  listTopics: Topic[] = [];
+  listTeachers: Teacher[] = [];
+  selectedCourse!: Course;
+  constructor(private courseService: CourseService, private teacherService: TeacherService,
+    private studentService: StudentService, private topicService: TopicService, private http: HttpClient) { }
 
   ngOnInit(): void {   
-    this.list();
+    this.getCourses();
+    this.getTopics();
+    this.getTeachers();
+    if(this.selectedCourse.id){
+      this.selectCourse(this.selectedCourse.id);
+    }
+    //this.selectCourse(1); //need to call at leats one to avoid ghost courses
+
   }
 
-  list(){
+  getCourses(){
     this.courseService.getCourses().subscribe(resp=>{
       if(resp){
         this.listCourses = resp;
+      }
+    });
+  }
+
+  getTeachers(){
+    this.teacherService.getTeachers().subscribe(resp=>{
+      if(resp){
+        this.listTeachers = resp;
+      }
+    });
+  }
+
+  getStudents(){
+    this.courseService.getCourses().subscribe(resp=>{
+      if(resp){
+        this.listCourses = resp;
+      }
+    });
+  }
+
+  getTopics(){
+    this.topicService.getTopics().subscribe(resp=>{
+      if(resp){
+        this.listTopics = resp;
       }
     });
   }
@@ -33,4 +72,10 @@ export class CourseComponent implements OnInit {
     })
   }
   
+  edit():void{
+    console.log(this.selectedCourse);
+    this.courseService.updateCourse(this.selectedCourse).subscribe(()=>{
+      this.getCourses();
+    });
+  }
 }

@@ -29,7 +29,7 @@ export class CourseService {
   }
 
   // update a course
-  updateCourse(id: number, Course: Course): Observable<Course> {
+  updateCourse(Course: Course): Observable<Course> {
     return this.http.put<Course>(`${this.apiUrl}`, Course);
   }
 

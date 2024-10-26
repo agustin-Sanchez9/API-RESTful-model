@@ -1,13 +1,13 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>id</th>
-            <th>topic</th>
-            <th>start date</th>
-            <th>end date</th>
-            <th>students</th>
-            <th>teachers</th>
-            <th>price</th>
+            <th>ID</th>
+            <th>TOPIC</th>
+            <th>START DATE</th>
+            <th>END DATE</th>
+            <th>STUDENTS</th>
+            <th>TEACHERS</th>
+            <th>PRICE</th>
             <th></th>
         </tr>
     </thead>
@@ -17,21 +17,80 @@
             <td>{{course.topic.name}}</td>
             <td>{{course.start_date}}</td>
             <td>{{course.end_date}}</td>
-            <td><button type="button" (click)="selectCourse(course.id)" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <td><button type="button" (click)="selectCourse(course.id)" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#studentsModal">
                  See list
             </button></td>            
             <td>{{course.teacher.name}}</td>
-            <td>{{course.price}}</td>
+            <td>${{course.price}}</td>
             <td>
-                <button type="button" class="btn btn-warning"><i class="bi-pencil"></i></button>
-                <button type="button" class="btn btn-danger"><i class="bi-trash3"></i></button>
+                <button type="button" (click)="selectCourse(course.id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi-pencil"></i></button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi-trash3"></i></button>
             </td>
         </tr>
     </tbody>
 </table>
 
+<div class="modal fade" id="studentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Students</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <td class="d-flex" *ngFor="let student of selectedCourse?.students">
+                <li>{{student.name}}</li>
+            </td>
+        </div>
+      </div>
+    </div>
+</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div *ngIf="selectedCourse" class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Course {{selectedCourse.id}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="m-2">
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="topicDropdown" [(ngModel)]="selectedCourse.topic.name" name="topic">
+                        <option *ngFor="let topic of listTopics" [value]="selectedCourse.topic.name">{{topic.name}}</option>
+                    </select>
+                    <label for="topicDropdown">Topic</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="start_date" [(ngModel)]="selectedCourse.start_date" name="start_date">
+                    <label for="start_date">Start Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="end_date" [(ngModel)]="selectedCourse.end_date" name="end_date">
+                    <label for="end_date">End Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="teacherDropdown" [(ngModel)]="selectedCourse.teacher.name" name="teacher">
+                        <option *ngFor="let teacher of listTeachers" [value]="selectedCourse.teacher.name">{{teacher.name}}</option>
+                    </select>
+                    <label for="teacherDropdown">Teacher</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="price" [(ngModel)]="selectedCourse.price" name="price">
+                    <label for="price">Price ($)</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi-x-lg"></i> Cancel</button>
+            <button type="button" class="btn btn-success" (click)="edit()"><i class="bi-check-lg"></i> Confirm</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -46,11 +105,3 @@
       </div>
     </div>
   </div>
-  
-
-
-<!--
-<td class="d-flex" *ngFor="let student of course.students">
-    <li>{{student.name}}</li>
-</td>
--->

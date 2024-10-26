@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class TopicComponent implements OnInit {
 
   listTopics: Topic[] = [];
+  selectedTopic!: Topic;
   constructor(private topicService: TopicService, private http: HttpClient) { }
 
   ngOnInit(): void {   
@@ -23,6 +24,19 @@ export class TopicComponent implements OnInit {
       if(resp){
         this.listTopics= resp;
       }
+    });
+  }
+
+  selectTopic(id: number): void {
+    this.topicService.getTopicById(id).subscribe((topic: Topic)=>{
+        this.selectedTopic = topic;
+    })
+  }
+
+  edit():void{
+    console.log(this.selectedTopic);
+    this.topicService.updateTopic(this.selectedTopic).subscribe(()=>{
+      this.list();
     });
   }
 }

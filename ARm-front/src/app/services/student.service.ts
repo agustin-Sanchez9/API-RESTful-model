@@ -19,7 +19,7 @@ export class StudentService {
 
   // get one student by his id
   getStudentById(id: number): Observable<Student> {
-    return this.http.get<Student>(`${this.apiUrl}/${id}`);
+    return this.http.get<Student>(`${this.apiUrl}?id=${id}`);
   }
 
   // create a new student
@@ -28,12 +28,12 @@ export class StudentService {
   }
 
   // update a student
-  updateStudent(id: number, student: Student): Observable<Student> {
-    return this.http.put<Student>(`${this.apiUrl}/${id}`, student);
+  updateStudent(student: Student): Observable<Student> {
+    return this.http.put<Student>(`${this.apiUrl}`, student);
   }
 
   // delete a student
   deleteStudent(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}?id=${id}`);
   }
 }

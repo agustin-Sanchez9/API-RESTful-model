@@ -21,7 +21,7 @@ export class TeacherService {
 
   // get one teacher by his id
   getTeacherById(id: number): Observable<Teacher> {
-    return this.http.get<Teacher>(`${this.apiUrl}/${id}`);
+    return this.http.get<Teacher>(`${this.apiUrl}?id=${id}`);
   }
 
   // create a new teacher
@@ -30,12 +30,12 @@ export class TeacherService {
   }
 
   // update a teacher
-  updateTeacher(id: number, Teacher: Teacher): Observable<Teacher> {
-    return this.http.put<Teacher>(`${this.apiUrl}/${id}`, Teacher);
+  updateTeacher(Teacher: Teacher): Observable<Teacher> {
+    return this.http.put<Teacher>(`${this.apiUrl}`, Teacher);
   }
 
   // delete a teacher
   deleteTeacher(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}?id=${id}`);
   }
 }

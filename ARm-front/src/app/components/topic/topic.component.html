@@ -1,9 +1,9 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>description</th>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>DESCRIPTION</th>
             <th></th>
         </tr>
     </thead>
@@ -13,9 +13,52 @@
             <td>{{topic.name}}</td>
             <td>{{topic.description}}</td>
             <td>
-                <button type="button" class="btn btn-warning"><i class="bi-pencil"></i></button>
-                <button type="button" class="btn btn-danger"><i class="bi-trash3"></i></button>
+                <button type="button" (click)="selectTopic(topic.id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi-pencil"></i></button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi-trash3"></i></button>
             </td>
         </tr>
     </tbody>
 </table>
+
+
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div *ngIf="selectedTopic" class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Student {{selectedTopic.id}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="m-2">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" [(ngModel)]="selectedTopic.name" name="name">
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="description" [(ngModel)]="selectedTopic.description" name="description">
+                    <label for="description">Description</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi-x-lg"></i> Cancel</button>
+            <button type="button" class="btn btn-success" (click)="edit()" data-bs-dismiss="modal"><i class="bi-check-lg"></i> Confirm</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Students</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        </div>
+      </div>
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class TeacherComponent implements OnInit {
 
   listTeachers: Teacher[] = [];
+  selectedTeacher!: Teacher;
   constructor(private teacherService: TeacherService, private http: HttpClient) { }
 
   ngOnInit(): void {   
@@ -22,6 +23,19 @@ export class TeacherComponent implements OnInit {
       if(resp){
         this.listTeachers = resp;
       }
+    });
+  }
+
+  selectTeacher(id: number): void {
+    this.teacherService.getTeacherById(id).subscribe((teacher: Teacher)=>{
+        this.selectedTeacher = teacher;
+    })
+  }
+
+  edit():void{
+    console.log(this.selectedTeacher);
+    this.teacherService.updateTeacher(this.selectedTeacher).subscribe(()=>{
+      this.list();
     });
   }
 }
