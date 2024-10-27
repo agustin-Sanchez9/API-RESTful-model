@@ -32,7 +32,7 @@ public class CourseEntity {
 	private LocalDate start_date;
 	
 	@Column(name = "end_date")
-	private LocalDate end_date;
+	private LocalDate endDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
@@ -76,11 +76,11 @@ public class CourseEntity {
 	}
 
 	public LocalDate getEnd_date() {
-		return end_date;
+		return endDate;
 	}
 
 	public void setEnd_date(LocalDate end_date) {
-		this.end_date = end_date;
+		this.endDate = end_date;
 	}
 
 	public TeacherEntity getTeacher() {

@@ -1,5 +1,6 @@
 package com.example.ARm.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,6 @@ public interface CourseInterface {
 	void update(CourseEntity course);
 	
 	void deleteById(Integer id);
+	
+	List<CourseEntity>findAllByEndDate(LocalDate date);
 }

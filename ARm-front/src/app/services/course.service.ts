@@ -10,6 +10,8 @@ export class CourseService {
 
   private apiUrl = 'http://localhost:8080/course'
   private apiUrlAll = 'http://localhost:8080/courses'
+  private apiUrlDate = 'http://localhost:8080/course-date'
+
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +23,11 @@ export class CourseService {
   // get one course by his id
   getCourseById(id: number): Observable<Course> {
     return this.http.get<Course>(`${this.apiUrl}?id=${id}`);
+  }
+
+  // get courses by they end date
+  getCourseByEndDate(date: Date): Observable<Course[]>{
+    return this.http.get<Course[]>(`${this.apiUrlDate}?date=${date}`);
   }
 
   // create a new course

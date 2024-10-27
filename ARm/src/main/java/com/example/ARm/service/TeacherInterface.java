@@ -3,6 +3,7 @@ package com.example.ARm.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.ARm.entity.StudentEntity;
 import com.example.ARm.entity.TeacherEntity;
 
 public interface TeacherInterface {
@@ -16,4 +17,6 @@ public interface TeacherInterface {
 	void update(TeacherEntity teacher);
 	
 	void deleteById(Integer id);
+	
+	List<StudentEntity>findSelfStudents(Integer id);
 }

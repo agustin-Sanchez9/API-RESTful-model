@@ -1,5 +1,6 @@
 package com.example.ARm.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,11 @@ public class CourseController {
 	@GetMapping("/course")
 	public Optional<CourseEntity> getCourse(@RequestParam Integer id){
 		return course_interface.findById(id);
+	}
+	
+	@GetMapping("/course-date")
+	public List<CourseEntity>findAllByEndDate(@RequestParam LocalDate date){
+		return course_interface.findAllByEndDate(date);
 	}
 	
 	@PostMapping("/course")

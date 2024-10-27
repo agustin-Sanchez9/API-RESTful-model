@@ -1,5 +1,6 @@
 package com.example.ARm.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +35,9 @@ public class CourseService implements CourseInterface{
 	
 	public void deleteById(Integer id) {
 		course_repository.deleteById(id);
+	}
+	
+	public List<CourseEntity> findAllByEndDate(LocalDate date) {
+		return course_repository.findAllByEndDate(date);
 	}
 }

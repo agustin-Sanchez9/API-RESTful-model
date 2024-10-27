@@ -20,6 +20,8 @@ export class CourseComponent implements OnInit {
   listTopics: Topic[] = [];
   listTeachers: Teacher[] = [];
   selectedCourse!: Course;
+  selectedDate: Date = new Date;
+  newCourse: Course = new Course;
   constructor(private courseService: CourseService, private teacherService: TeacherService,
     private studentService: StudentService, private topicService: TopicService, private http: HttpClient) { }
 
@@ -36,6 +38,14 @@ export class CourseComponent implements OnInit {
 
   getCourses(){
     this.courseService.getCourses().subscribe(resp=>{
+      if(resp){
+        this.listCourses = resp;
+      }
+    });
+  }
+
+  getCoursesByEndDate(){
+    this.courseService.getCourseByEndDate(this.selectedDate).subscribe(resp=>{
       if(resp){
         this.listCourses = resp;
       }
@@ -73,8 +83,19 @@ export class CourseComponent implements OnInit {
   }
   
   edit():void{
-    console.log(this.selectedCourse);
     this.courseService.updateCourse(this.selectedCourse).subscribe(()=>{
+      this.getCourses();
+    });
+  }
+
+  new():void{
+    this.courseService.createCourse(this.newCourse).subscribe(()=>{
+      this.getCourses();
+    });
+  }
+
+  delete():void{
+    this.courseService.deleteCourse(this.selectedCourse.id).subscribe(()=>{
       this.getCourses();
     });
   }
