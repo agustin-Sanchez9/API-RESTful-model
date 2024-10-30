@@ -1,11 +1,19 @@
 <header>
-  <div class="titles">
-  </div>
-  <div class ="nav">
-    <button type="button" class="btn btn-primary" (click)="navigateTo('courses')">Courses</button>
-    <button type="button" class="btn btn-primary" (click)="navigateTo('students')">Students</button>
-    <button type="button" class="btn btn-primary" (click)="navigateTo('teachers')">Teachers</button>
-    <button type="button" class="btn btn-primary"(click)="navigateTo('topics')">Topics</button>
+  <div class="">
+    <ul class="nav nav-pills mt-2 nav-fill gap-2 p-1 small bg-primary rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active rounded-5" (click)="navigateTo('courses')" id="courses-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Courses</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" (click)="navigateTo('students')" id="students-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Students</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" (click)="navigateTo('teachers')" id="teachers-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Teachers</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-5" (click)="navigateTo('topics')" id="topics-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Topics</button>
+      </li>
+    </ul>
   </div>
 </header>
 

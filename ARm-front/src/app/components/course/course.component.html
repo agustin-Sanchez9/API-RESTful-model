@@ -6,10 +6,10 @@
         <tr>
             <th>ID</th>
             <th>TOPIC</th>
+            <th>TEACHERS</th>
+            <th>STUDENTS</th>
             <th>START DATE</th>
             <th>END DATE</th>
-            <th>STUDENTS</th>
-            <th>TEACHERS</th>
             <th>PRICE</th>
             <th></th>
         </tr>
@@ -18,12 +18,12 @@
         <tr *ngFor="let course of listCourses">
             <td>{{course.id}}</td>
             <td>{{course.topic.name}}</td>
+            <td>{{course.teacher.name}}</td>
+            <td><button type="button" (click)="selectCourse(course.id)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#studentsModal">
+                See list
+           </button></td>
             <td>{{course.start_date}}</td>
             <td>{{course.end_date}}</td>
-            <td><button type="button" (click)="selectCourse(course.id)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#studentsModal">
-                 See list
-            </button></td>            
-            <td>{{course.teacher.name}}</td>
             <td>${{course.price}}</td>
             <td>
                 <button type="button" (click)="selectCourse(course.id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi-pencil"></i></button>
@@ -64,6 +64,13 @@
                     </select>
                     <label for="topicDropdown">Topic</label>
                 </div>
+                
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="teacherDropdown" [(ngModel)]="newTeacher.id" name="teacher">
+                        <option *ngFor="let teacher of listTeachers" [value]="teacher.id">{{teacher.name}}</option>
+                    </select>
+                    <label for="teacherDropdown">Teacher</label>
+                </div>
                 <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="start_date" [(ngModel)]="newCourse.start_date" name="start_date">
                     <label for="start_date">Start Date</label>
@@ -73,15 +80,25 @@
                     <label for="end_date">End Date</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="teacherDropdown" [(ngModel)]="newTeacher.id" name="teacher">
-                        <option *ngFor="let teacher of listTeachers" [value]="teacher.id">{{teacher.name}}</option>
-                    </select>
-                    <label for="teacherDropdown">Teacher</label>
-                </div>
-                <div class="form-floating mb-3">
                     <input type="number" class="form-control" id="price" [(ngModel)]="newCourse.price" name="price">
                     <label for="price">Price ($)</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <div class="form-floating mb-3">
+                        <div id="studentsDropdown">
+                            <div class="form-check" *ngFor="let student of listStudents">
+                                <input 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    [value]="student.id" 
+                                    (change)="onCheckboxChange($event, student)" 
+                                    [checked]="isStudentSelected(student)" 
+                                />
+                                <label class="form-check-label">{{ student.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>                 
             </form>
         </div>
         <div class="modal-footer">
@@ -108,18 +125,18 @@
                     <label for="topicDropdown">Topic</label>
                 </div>
                 <div class="form-floating mb-3">
+                    <select class="form-select" id="teacherDropdown" [(ngModel)]="selectedCourse.teacher.id" name="teacher">
+                        <option *ngFor="let teacher of listTeachers" [value]="teacher.id">{{teacher.name}}</option>
+                    </select>
+                    <label for="teacherDropdown">Teacher</label>
+                </div>
+                <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="start_date" [(ngModel)]="selectedCourse.start_date" name="start_date">
                     <label for="start_date">Start Date</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="date" class="form-control" id="end_date" [(ngModel)]="selectedCourse.end_date" name="end_date">
                     <label for="end_date">End Date</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="teacherDropdown" [(ngModel)]="selectedCourse.teacher.id" name="teacher">
-                        <option *ngFor="let teacher of listTeachers" [value]="teacher.id">{{teacher.name}}</option>
-                    </select>
-                    <label for="teacherDropdown">Teacher</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="number" class="form-control" id="price" [(ngModel)]="selectedCourse.price" name="price">

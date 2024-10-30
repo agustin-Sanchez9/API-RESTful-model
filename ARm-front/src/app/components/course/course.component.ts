@@ -19,15 +19,17 @@ export class CourseComponent implements OnInit {
   listCourses: Course[] = [];
   listTopics: Topic[] = [];
   listTeachers: Teacher[] = [];
+  listStudents: Student[] = [];
 
   selectedCourse!: Course;
   selectedDate: Date = new Date;
 
   newTeacher: Teacher = new Teacher;
   newTopic: Topic = new Topic;
+  newStudents: Student[] = [];
 
   newCourse: Course = new Course;
-  
+
   constructor(private courseService: CourseService, private teacherService: TeacherService,
     private studentService: StudentService, private topicService: TopicService, private http: HttpClient) { }
 
@@ -35,6 +37,7 @@ export class CourseComponent implements OnInit {
     this.getCourses();
     this.getTopics();
     this.getTeachers();
+    this.getStudents();
     if(this.selectedCourse.id){
       this.selectCourse(this.selectedCourse.id);
     }
@@ -67,9 +70,9 @@ export class CourseComponent implements OnInit {
   }
 
   getStudents(){
-    this.courseService.getCourses().subscribe(resp=>{
+    this.studentService.getStudents().subscribe(resp=>{
       if(resp){
-        this.listCourses = resp;
+        this.listStudents = resp;
       }
     });
   }
@@ -97,6 +100,7 @@ export class CourseComponent implements OnInit {
   new():void{
     this.newCourse.teacher = this.newTeacher;
     this.newCourse.topic = this.newTopic;
+    this.newCourse.students = this.newStudents;
     this.courseService.createCourse(this.newCourse).subscribe(()=>{
       this.getCourses();
     });
@@ -107,4 +111,18 @@ export class CourseComponent implements OnInit {
       this.getCourses();
     });
   }
+
+  onCheckboxChange(event: Event, student: Student) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+        this.newStudents.push(student);
+    } else {
+        this.newStudents = this.newStudents.filter(s => s.id !== student.id);
+    }
+  }
+
+  isStudentSelected(student: Student): boolean {
+    return this.newStudents.some(s => s.id === student.id);
+  }
+
 }

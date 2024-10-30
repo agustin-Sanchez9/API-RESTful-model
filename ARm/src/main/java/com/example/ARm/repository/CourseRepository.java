@@ -12,5 +12,5 @@ public interface CourseRepository extends JpaRepository<CourseEntity, Integer> {
 
 	List<CourseEntity> findAllByEndDate(LocalDate date);
 	
-	CourseEntity findByTeacher_Id(Integer id);
+	List<CourseEntity> findByTeacher_Id(Integer id);
 }

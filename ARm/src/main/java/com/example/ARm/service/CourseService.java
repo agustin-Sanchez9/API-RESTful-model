@@ -1,8 +1,11 @@
 package com.example.ARm.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +47,11 @@ public class CourseService implements CourseInterface{
 
 	@Override
 	public List<StudentEntity> findStudentsByTeacher(Integer id) {
-		CourseEntity course = course_repository.findByTeacher_Id(id);
-		return course.getStudents();
+	    List<CourseEntity> courses = course_repository.findByTeacher_Id(id);
+	    Set<StudentEntity> students = new HashSet<>();
+	    for (CourseEntity course : courses) {
+	        students.addAll(course.getStudents());
+	    }
+	    return new ArrayList<>(students);
 	}
 }
