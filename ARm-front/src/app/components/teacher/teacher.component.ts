@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Teacher } from '../../models/Teacher';
 import { TeacherService } from '../../services/teacher.service';
 import { HttpClient } from '@angular/common/http';
+import { Student } from '../../models/Student';
 
 @Component({
   selector: 'app-teacher',
@@ -11,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class TeacherComponent implements OnInit {
 
   listTeachers: Teacher[] = [];
+  listSelfStudents: Student[] = [];
   selectedTeacher!: Teacher;
   newTeacher: Teacher = new Teacher;
   constructor(private teacherService: TeacherService, private http: HttpClient) { }
@@ -31,6 +33,13 @@ export class TeacherComponent implements OnInit {
     this.teacherService.getTeacherById(id).subscribe((teacher: Teacher)=>{
         this.selectedTeacher = teacher;
     })
+  }
+
+  selfStudents(id : number): void{
+    this.selectTeacher(id)
+    this.teacherService.getTeacherStudents(id).subscribe((students: Student[])=>{
+      this.listSelfStudents = students;
+  })
   }
 
   edit():void{

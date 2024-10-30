@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ARm.entity.StudentEntity;
 import com.example.ARm.entity.TeacherEntity;
 import com.example.ARm.service.TeacherInterface;
 
@@ -31,6 +32,11 @@ public class TeacherController {
 	@GetMapping("/teacher")
 	public Optional<TeacherEntity> getTeacher(@RequestParam Integer id){
 		return teacher_interface.findById(id);
+	}
+	
+	@GetMapping("/teacher-students")
+	public List<StudentEntity> getStudentsByTeacher(@RequestParam Integer id){
+		return teacher_interface.findSelfStudents(id);
 	}
 	
 	@PostMapping("/teacher")

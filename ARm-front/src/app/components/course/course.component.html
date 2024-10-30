@@ -59,24 +59,24 @@
         <div class="modal-body">
             <form class="m-2">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="topic" [(ngModel)]="newCourse.topic" name="topic">
-                    <label for="topic">Topic</label>
+                    <select class="form-select" id="topicDropdown" [(ngModel)]="newTopic.id" name="topic">
+                        <option *ngFor="let topic of listTopics" [value]="topic.id">{{topic.name}}</option>
+                    </select>
+                    <label for="topicDropdown">Topic</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="start date" [(ngModel)]="newCourse.start_date" name="start date">
-                    <label for="start date">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" [(ngModel)]="newCourse.start_date" name="start_date">
+                    <label for="start_date">Start Date</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="end date" [(ngModel)]="newCourse.end_date" name="end date">
-                    <label for="end date">End Date</label>
+                    <input type="date" class="form-control" id="end_date" [(ngModel)]="newCourse.end_date" name="end_date">
+                    <label for="end_date">End Date</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="students" [(ngModel)]="newCourse.students" name="students">
-                    <label for="students">Students</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="teacher" [(ngModel)]="newCourse.teacher" name="teacher">
-                    <label for="teacher">Teacher</label>
+                    <select class="form-select" id="teacherDropdown" [(ngModel)]="newTeacher.id" name="teacher">
+                        <option *ngFor="let teacher of listTeachers" [value]="teacher.id">{{teacher.name}}</option>
+                    </select>
+                    <label for="teacherDropdown">Teacher</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="number" class="form-control" id="price" [(ngModel)]="newCourse.price" name="price">
@@ -102,8 +102,8 @@
         <div class="modal-body">
             <form class="m-2">
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="topicDropdown" [(ngModel)]="selectedCourse.topic.name" name="topic">
-                        <option *ngFor="let topic of listTopics" [value]="selectedCourse.topic.name">{{topic.name}}</option>
+                    <select class="form-select" id="topicDropdown" [(ngModel)]="selectedCourse.topic.id" name="topic">
+                        <option *ngFor="let topic of listTopics" [value]="topic.id">{{topic.name}}</option>
                     </select>
                     <label for="topicDropdown">Topic</label>
                 </div>
@@ -116,8 +116,8 @@
                     <label for="end_date">End Date</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="teacherDropdown" [(ngModel)]="selectedCourse.teacher.name" name="teacher">
-                        <option *ngFor="let teacher of listTeachers" [value]="selectedCourse.teacher.name">{{teacher.name}}</option>
+                    <select class="form-select" id="teacherDropdown" [(ngModel)]="selectedCourse.teacher.id" name="teacher">
+                        <option *ngFor="let teacher of listTeachers" [value]="teacher.id">{{teacher.name}}</option>
                     </select>
                     <label for="teacherDropdown">Teacher</label>
                 </div>

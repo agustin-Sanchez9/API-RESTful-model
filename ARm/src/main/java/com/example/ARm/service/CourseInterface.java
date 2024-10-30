@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.ARm.entity.CourseEntity;
+import com.example.ARm.entity.StudentEntity;
 
 public interface CourseInterface {
 
@@ -18,5 +19,7 @@ public interface CourseInterface {
 	
 	void deleteById(Integer id);
 	
-	List<CourseEntity>findAllByEndDate(LocalDate date);
+	List<CourseEntity> findAllByEndDate(LocalDate date);
+	
+	List<StudentEntity> findStudentsByTeacher(Integer id);
 }

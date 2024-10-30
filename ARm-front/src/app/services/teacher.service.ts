@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
+import { Student } from '../models/Student';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ export class TeacherService {
 
   private apiUrl = 'http://localhost:8080/teacher'
   private apiUrlAll = 'http://localhost:8080/teachers'
+  private apiUrlStudents = 'http://localhost:8080/teacher-students'
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +24,11 @@ export class TeacherService {
   // get one teacher by his id
   getTeacherById(id: number): Observable<Teacher> {
     return this.http.get<Teacher>(`${this.apiUrl}?id=${id}`);
+  }
+
+  // get the teachers students by his id
+  getTeacherStudents(id:number): Observable<Student[]>{
+    return this.http.get<Student[]>(`${this.apiUrlStudents}?id=${id}`);
   }
 
   // create a new teacher

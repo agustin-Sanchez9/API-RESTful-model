@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ARm.entity.CourseEntity;
+import com.example.ARm.entity.StudentEntity;
 import com.example.ARm.repository.CourseRepository;
 
 @Service
@@ -39,5 +40,11 @@ public class CourseService implements CourseInterface{
 	
 	public List<CourseEntity> findAllByEndDate(LocalDate date) {
 		return course_repository.findAllByEndDate(date);
+	}
+
+	@Override
+	public List<StudentEntity> findStudentsByTeacher(Integer id) {
+		CourseEntity course = course_repository.findByTeacher_Id(id);
+		return course.getStudents();
 	}
 }

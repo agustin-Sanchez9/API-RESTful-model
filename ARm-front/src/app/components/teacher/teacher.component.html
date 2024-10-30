@@ -5,6 +5,7 @@
             <th>ID</th>
             <th>NAME</th>
             <th>TEACHER CODE</th>
+            <th>STUDENTS</th>
             <th></th>
         </tr>
     </thead>
@@ -13,6 +14,9 @@
             <td>{{teacher.id}}</td>
             <td>{{teacher.name}}</td>
             <td>{{teacher.teacher_id}}</td>
+            <td><button type="button" (click)="selfStudents(teacher.id)" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#studentsModal">
+                See list
+           </button></td>
             <td>
                 <button type="button" (click)="selectTeacher(teacher.id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi-pencil"></i></button>
                 <button type="button" (click)="selectTeacher(teacher.id)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi-trash3"></i></button>
@@ -87,6 +91,22 @@
             <p>Do you want to delete the teacher: {{selectedTeacher.name}}?</p>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi-x-lg"></i> NO</button>
             <button type="button" (click)="delete()" class="btn btn-success" data-bs-dismiss="modal"><i class="bi-check-lg"></i> YES</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="studentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div *ngIf="selectedTeacher" class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Students</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <td class="d-flex" *ngFor="let student of listSelfStudents">
+                <li>{{student.name}}</li>
+            </td>
         </div>
       </div>
     </div>

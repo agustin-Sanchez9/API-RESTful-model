@@ -19,9 +19,15 @@ export class CourseComponent implements OnInit {
   listCourses: Course[] = [];
   listTopics: Topic[] = [];
   listTeachers: Teacher[] = [];
+
   selectedCourse!: Course;
   selectedDate: Date = new Date;
+
+  newTeacher: Teacher = new Teacher;
+  newTopic: Topic = new Topic;
+
   newCourse: Course = new Course;
+  
   constructor(private courseService: CourseService, private teacherService: TeacherService,
     private studentService: StudentService, private topicService: TopicService, private http: HttpClient) { }
 
@@ -89,6 +95,8 @@ export class CourseComponent implements OnInit {
   }
 
   new():void{
+    this.newCourse.teacher = this.newTeacher;
+    this.newCourse.topic = this.newTopic;
     this.courseService.createCourse(this.newCourse).subscribe(()=>{
       this.getCourses();
     });

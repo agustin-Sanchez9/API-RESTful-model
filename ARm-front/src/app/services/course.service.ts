@@ -31,13 +31,13 @@ export class CourseService {
   }
 
   // create a new course
-  createCourse(Course: Course): Observable<Course> {
-    return this.http.post<Course>(this.apiUrl, Course);
+  createCourse(course: Course): Observable<Course> {
+    return this.http.post<Course>(this.apiUrl, course);
   }
 
   // update a course
-  updateCourse(Course: Course): Observable<Course> {
-    return this.http.put<Course>(`${this.apiUrl}`, Course);
+  updateCourse(course: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.apiUrl}`, course);
   }
 
   // delete a course
